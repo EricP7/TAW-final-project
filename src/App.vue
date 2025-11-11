@@ -1,6 +1,6 @@
 <script setup>
-import Header from "./components/Header.vue";
-import LandingPage from "./components/LandingPage.vue";
+import Header from "./components/landing_page/Header.vue";
+import LandingPage from "./components/landing_page/LandingPage.vue";
 </script>
 
 <template>
