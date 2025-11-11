@@ -1,6 +1,7 @@
 <script setup>
 import Header from "./components/landing_page/Header.vue";
 import LandingPage from "./components/landing_page/LandingPage.vue";
+import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>

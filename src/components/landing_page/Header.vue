@@ -1,12 +1,14 @@
-<script setup></script>
+<script setup>
+import { RouterLink, RouterView } from "vue-router";
+</script>
 
 <template>
-    <header>
-        <p>logo name</p>
-        <button>Pricing</button>
-        <button>FAQ</button>
-        <button>About Us</button>
-    </header>
+    <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/pricing">Pricing</RouterLink>
+        <RouterLink to="/faq">FAQ</RouterLink>
+        <RouterLink to="/aboutus">About Us</RouterLink>
+    </nav>
 </template>
 
 <style></style>
