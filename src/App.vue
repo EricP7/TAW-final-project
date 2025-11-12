@@ -1,24 +1,14 @@
 <script setup>
 import Header from "./components/landing_page/Header.vue";
-import LandingPage from "./components/landing_page/LandingPage.vue";
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
 </script>
 
 <template>
     <Header></Header>
 
     <title>TAW Final Project</title>
-    <h1>App.vue</h1>
 
-    <LandingPage></LandingPage>
-
-    <p>
-        Visit
-        <a href="https://vuejs.org/" target="_blank" rel="noopener"
-            >vuejs.org</a
-        >
-        to read the documentation
-    </p>
+    <RouterView></RouterView>
 </template>
 
 <style scoped></style>
