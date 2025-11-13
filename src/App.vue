@@ -4,13 +4,13 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-    <Header></Header>
-
-    <title>TAW Final Project</title>
-
-    <RouterView></RouterView>
+    <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        <Header></Header>
+        <title>TAW Final Project</title>
+        <RouterView></RouterView>
+    </div>
 </template>
 
-<style scoped>
+<style>
 @import "tailwindcss";
 </style>

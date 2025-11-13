@@ -1,7 +1,13 @@
 <script setup></script>
 
 <template>
-    <h1>Frequently Asked Questions page here</h1>
+    <div class="max-w-4xl mx-auto px-4 py-16">
+        <h1 class="text-4xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h1>
+
+        <div class="bg-white rounded-xl shadow-md p-8">
+            <p class="text-gray-600 text-center">FAQ content coming soon...</p>
+        </div>
+    </div>
 </template>
 
 <style></style>
