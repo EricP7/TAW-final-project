@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-    <h1>Frequently Asked Questions page here</h1>
+    <h1>Reset Password page here</h1>
 </template>
 
 <style></style>

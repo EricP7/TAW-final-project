@@ -11,4 +11,6 @@ import { RouterView } from "vue-router";
     <RouterView></RouterView>
 </template>
 
-<style scoped></style>
+<style scoped>
+@import "tailwindcss";
+</style>

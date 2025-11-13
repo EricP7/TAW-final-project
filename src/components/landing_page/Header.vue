@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+import ProfileTab from "../header_components/ProfileTab.vue";
 </script>
 
 <template>
@@ -8,7 +9,9 @@ import { RouterLink, RouterView } from "vue-router";
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/pricing">Pricing</RouterLink>
             <RouterLink to="/faq">FAQ</RouterLink>
-            <RouterLink to="/aboutus">About Us</RouterLink>
+            <RouterLink to="/about-us">About Us</RouterLink>
+            <!-- <RouterLink to="/signin">Sign In</RouterLink> -->
+            <ProfileTab type="Sign In"></ProfileTab>
         </nav>
     </header>
     <!-- <RouterView></RouterView> -->

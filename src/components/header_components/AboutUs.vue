@@ -1,5 +1,7 @@
 <script setup></script>
 
-<template></template>
+<template>
+    <h1>About Us page here</h1>
+</template>
 
 <style></style>

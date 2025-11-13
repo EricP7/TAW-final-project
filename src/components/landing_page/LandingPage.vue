@@ -1,4 +1,12 @@
-<script setup></script>
+<script setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const navigateToHowItWorks = () => {
+    router.push("/how-it-works");
+};
+</script>
 
 <template>
     <h1>Landing Page</h1>
@@ -16,7 +24,7 @@
         of Lorem Ipsum.
     </p>
 
-    <button>How it Works</button>
+    <button @click="navigateToHowItWorks">How it Works</button>
 </template>
 
 <style></style>
