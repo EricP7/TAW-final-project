@@ -18,5 +18,23 @@ export default defineConfig([
   { files: ["**/*.json5"], plugins: { json }, language: "json/json5", extends: ["json/recommended"] },
   { files: ["**/*.md"], plugins: { markdown }, language: "markdown/commonmark", extends: ["markdown/recommended"] },
   { files: ["**/*.css"], plugins: { css }, language: "css/css", extends: ["css/recommended"] },
+  { files: ["**/*.{js,mjs,cjs,vue}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
+  ...pluginVue.configs["flat/essential"].map(config => ({
+    ...config,
+    files: ["**/*.vue"]
+  })),
+  {
+    rules: {
+      // override/add rules settings here, such as:
+      // 'vue/no-unused-vars': 'error'
+      "no-alert": "error"
+    },
+    languageOptions: {
+      sourceType: 'module',
+      globals: {
+        ...globals.browser
+      }
+    }
+  },
 ]);
 
