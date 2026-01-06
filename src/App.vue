@@ -1,5 +1,5 @@
 <script setup>
-import Header from "./components/landing_page/Header.vue";
+import Header from "./components/landing_page/HeaderSection.vue";
 import { RouterView } from "vue-router";
 </script>
 
