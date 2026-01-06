@@ -4,7 +4,8 @@
     "service": "app",
     "workspaceFolder": "/app",
     "mounts": [
-        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/node/.gitconfig,type=bind,consistency=cached"
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/node/.gitconfig,type=bind,consistency=cached",
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/node/.ssh,type=bind,consistency=cached"
     ],
     "customizations": {
         "vscode": {
@@ -24,6 +25,9 @@
     ],
     "containerEnv": {
         "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0"
+    },
+    "remoteEnv": {
+        "SSH_AUTH_SOCK": "${localEnv:SSH_AUTH_SOCK}"
     },
     "postCreateCommand": "yarn install"
 }
