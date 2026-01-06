@@ -19,7 +19,7 @@ export default defineConfig([
   { files: ["**/*.md"], plugins: { markdown }, language: "markdown/commonmark", extends: ["markdown/recommended"] },
   { files: ["**/*.css"], plugins: { css }, language: "css/css", extends: ["css/recommended"] },
   { files: ["**/*.{js,mjs,cjs,vue}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
-  ...pluginVue.configs["flat/essential"].map(config => ({
+  ...pluginVue.configs["flat/recommended"].map(config => ({
     ...config,
     files: ["**/*.vue"]
   })),

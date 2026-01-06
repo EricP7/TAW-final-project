@@ -16,12 +16,12 @@ const handleClick = () => {
 </script>
 
 <template>
-    <button
-        @click="handleClick"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg"
-    >
-        {{ text }}
-    </button>
+  <button
+    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg"
+    @click="handleClick"
+  >
+    {{ text }}
+  </button>
 </template>
 
 <style></style>
