@@ -1,5 +1,6 @@
 <script setup>
 import { useRouter } from "vue-router";
+import ActionButton from '../ActionButton.vue';
 
 const router = useRouter();
 
@@ -9,6 +10,11 @@ const navigateToSignUp = () => {
 
 const navigateToResetPassword = () => {
     router.push("/reset-password");
+}
+
+const handleSignIn = () => {
+    // Sign in logic would go here
+    console.log("Sign in clicked");
 }
 
 </script>
@@ -38,9 +44,12 @@ const navigateToResetPassword = () => {
                     />
                 </div>
 
-                <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg mt-6">
-                    Sign In
-                </button>
+                <div class="mt-6">
+                    <ActionButton
+                        text="Sign In"
+                        @buttonClick="handleSignIn"
+                    />
+                </div>
 
                 <div class="flex flex-col space-y-3 mt-6 pt-6 border-t border-gray-200">
                     <button

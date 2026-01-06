@@ -1,5 +1,6 @@
 <script setup>
 import { useRouter } from "vue-router";
+import ActionButton from '../ActionButton.vue';
 
 const router = useRouter();
 
@@ -29,12 +30,12 @@ const navigateToHowItWorks = () => {
             of Lorem Ipsum.
         </p>
 
-        <button
-            @click="navigateToHowItWorks"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg"
-        >
-            How it Works
-        </button>
+        <div class="max-w-xs mx-auto">
+            <ActionButton
+                text="How it Works"
+                @buttonClick="navigateToHowItWorks"
+            />
+        </div>
     </div>
 </template>
 

@@ -1,4 +1,11 @@
-<script setup></script>
+<script setup>
+import ActionButton from '../ActionButton.vue';
+
+const handleSignUp = () => {
+    // Sign up logic would go here
+    console.log("Sign up clicked");
+}
+</script>
 
 <template>
     <div class="max-w-md mx-auto px-4 py-16">
@@ -53,9 +60,12 @@
                     />
                 </div>
 
-                <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg mt-6">
-                    Sign Up
-                </button>
+                <div class="mt-6">
+                    <ActionButton
+                        text="Sign Up"
+                        @buttonClick="handleSignUp"
+                    />
+                </div>
             </div>
         </div>
     </div>

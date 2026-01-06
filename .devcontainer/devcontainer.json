@@ -1,0 +1,29 @@
+{
+    "name": "Final Project - VueJS",
+    "dockerComposeFile": "../compose.yaml",
+    "service": "app",
+    "workspaceFolder": "/app",
+    "mounts": [
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/node/.gitconfig,type=bind,consistency=cached"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "Vue.volar"
+            ],
+            "settings": {
+                "editor.formatOnSave": true,
+                "[vue]": {
+                    "editor.defaultFormatter": "Vue.volar"
+                }
+            }
+        }
+    },
+    "forwardPorts": [
+        5173
+    ],
+    "containerEnv": {
+        "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0"
+    },
+    "postCreateCommand": "yarn install"
+}
