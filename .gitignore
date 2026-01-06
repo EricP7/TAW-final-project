@@ -34,3 +34,6 @@ coverage
 
 # Vitest
 __screenshots__/
+
+# Roadmap for development
+PROJECT_ROADMAP.md

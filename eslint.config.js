@@ -5,6 +5,7 @@ import json from "@eslint/json";
 import markdown from "@eslint/markdown";
 import css from "@eslint/css";
 import { defineConfig } from "eslint/config";
+import pluginPrettier from "eslint-config-prettier"
 
 export default defineConfig([
   { ignores: ["dist/**", "dev-dist/**", ".pnp.*", ".yarn/**", "node_modules/**", "**/*.md"] },
@@ -36,5 +37,6 @@ export default defineConfig([
       }
     }
   },
+  pluginPrettier
 ]);
 

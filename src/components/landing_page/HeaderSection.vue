@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink} from "vue-router";
 import ProfileTab from "../header_components/ProfileTab.vue";
 </script>
 
