@@ -40,7 +40,8 @@ const props = defineProps({
         </RouterLink>
       </div>
       <div class="flex items-center space-x-6">
-        <RouterLink v-for="link in props.navigationLinks" :key="link.path" :to="link.path"
+        <RouterLink
+v-for="link in props.navigationLinks" :key="link.path" :to="link.path"
           class="text-gray-700 hover:text-blue-600 transition-colors font-medium">
           {{ link.label }}
         </RouterLink>

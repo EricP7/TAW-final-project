@@ -1,11 +1,24 @@
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from "vue-router";
 
+const emit = defineEmits(['groupJoined', 'joinError']);
+const inviteCode = ref('');
 const router = useRouter();
 
-const navigateToMyGroups = () => {
-    router.push("/groups");
+const handleJoinGroup = () => {
+  if (!inviteCode.value.trim()) {
+    emit('joinError', 'Please enter an invite code.');
+    return;
+  }
+
+  emit('groupJoined', inviteCode.value);
+
+  // Clear the input field
+  inviteCode.value = '';
+  router.push("/groups");
 };
+
 </script>
 
 <template>
@@ -21,16 +34,13 @@ const navigateToMyGroups = () => {
       <div class="space-y-6">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Group Code</label>
-          <input
-            type="text"
-            placeholder="Enter invite code"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all"
-          >
+          <input v-model="inviteCode" type="text" placeholder="Enter invite code"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all">
         </div>
 
         <button
           class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg"
-        >
+          @click="handleJoinGroup">
           Join Group
         </button>
       </div>

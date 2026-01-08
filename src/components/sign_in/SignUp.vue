@@ -1,9 +1,51 @@
 <script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import ActionButton from '../ActionButton.vue';
 
+const emit = defineEmits(['signUpSuccess', 'signUpError']);
+
+const firstName = ref('');
+const lastName = ref('');
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+
+const router = useRouter();
+
 const handleSignUp = () => {
-    // Sign up logic would go here
-    console.log("Sign up clicked");
+  // Validation
+  if (!firstName.value.trim() || !lastName.value.trim() || !email.value.trim() || !password.value.trim() || !confirmPassword.value.trim()) {
+    emit('signUpError', 'Please fill in all fields.');
+    return;
+  }
+
+  // Check if passwords match
+  if (password.value !== confirmPassword.value) {
+    emit('signUpError', 'Passwords do not match.');
+    return;
+  }
+
+  // Simulate signup (in real app, call API here)
+  try {
+    const userData = {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+    };
+
+    emit('signUpSuccess', userData);
+
+    // Clear form and navigate
+    firstName.value = '';
+    lastName.value = '';
+    email.value = '';
+    password.value = '';
+    confirmPassword.value = '';
+    router.push('/dashboard');
+  } catch (error) {
+    emit('signUpError', error.message);
+  }
 }
 </script>
 
@@ -21,54 +63,36 @@ const handleSignUp = () => {
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-            <input
-              type="text"
-              placeholder="First Name"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-            >
+            <input v-model="firstName" type="text" placeholder="First Name"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-            <input
-              type="text"
-              placeholder="Last Name"
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-            >
+            <input v-model="lastName" type="text" placeholder="Last Name"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
           </div>
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-          <input
-            type="email"
-            placeholder="Email"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-          >
+          <input v-model="email" type="email" placeholder="Email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-          <input
-            type="password"
-            placeholder="Password"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-          >
+          <input v-model="password" type="password" placeholder="Password"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-          >
+          <input v-model="confirmPassword" type="password" placeholder="Confirm Password"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
         </div>
 
         <div class="mt-6">
-          <ActionButton
-            text="Sign Up"
-            @button-click="handleSignUp"
-          />
+          <ActionButton text="Sign Up" @button-click="handleSignUp" />
         </div>
       </div>
     </div>

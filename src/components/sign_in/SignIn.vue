@@ -1,20 +1,47 @@
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from "vue-router";
 import ActionButton from '../ActionButton.vue';
+
+const emit = defineEmits(['loginSuccess', 'loginError']);
+
+const email = ref('');
+const password = ref('');
 
 const router = useRouter();
 
 const navigateToSignUp = () => {
-    router.push("/sign-up");
+  router.push("/sign-up");
 }
 
 const navigateToResetPassword = () => {
-    router.push("/reset-password");
+  router.push("/reset-password");
 }
 
 const handleSignIn = () => {
-    // Sign in logic would go here
-    console.log("Sign in clicked");
+  // Basic validation
+  if (!email.value.trim() || !password.value.trim()) {
+    emit('loginError', 'Please enter both email and password.');
+    return;
+  }
+
+  // Simulate login (in real app, call API here)
+  try {
+    const userData = {
+      email: email.value,
+    };
+
+
+    emit('loginSuccess', userData);
+
+    // Clear form and navigate
+    email.value = '';
+    password.value = '';
+    router.push("/dashboard");
+
+  } catch (error) {
+    emit('loginError', error.message);
+  }
 }
 
 </script>
@@ -32,40 +59,28 @@ const handleSignIn = () => {
       <div class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-          <input
-            type="email"
-            placeholder="Enter Email"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-          >
+          <input v-model="email" type="email" placeholder="Enter Email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-          <input
-            type="password"
-            placeholder="Enter Password"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-          >
+          <input v-model="password" type="password" placeholder="Enter Password"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
         </div>
 
         <div class="mt-6">
-          <ActionButton
-            text="Sign In"
-            @button-click="handleSignIn"
-          />
+          <ActionButton text="Sign In" @button-click="handleSignIn" />
         </div>
 
         <div class="flex flex-col space-y-3 mt-6 pt-6 border-t border-gray-200">
           <button
             class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-6 py-2 rounded-lg transition-colors"
-            @click="navigateToSignUp"
-          >
+            @click="navigateToSignUp">
             Create Account
           </button>
-          <button
-            class="text-blue-600 hover:text-blue-700 font-medium transition-colors"
-            @click="navigateToResetPassword"
-          >
+          <button class="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+            @click="navigateToResetPassword">
             Forgot Password?
           </button>
         </div>
