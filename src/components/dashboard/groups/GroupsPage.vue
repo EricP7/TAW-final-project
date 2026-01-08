@@ -6,10 +6,10 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const navigateToCreateJoinGroup = () => {
-    router.push("/create-group-info");
+  router.push("/create-group-info");
 };
 const navigateToJoinGroup = () => {
-    router.push("/join-group");
+  router.push("/join-group");
 };
 </script>
 
@@ -20,20 +20,18 @@ const navigateToJoinGroup = () => {
     </h1>
 
     <div class="mb-8">
-      <GroupCard />
+      <GroupCard group-name="My Group" due-date="10.12.2025" budget="30$" rules="some rules here" group-id="1" />
     </div>
 
     <div class="flex justify-center gap-4">
       <button
         class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg"
-        @click="navigateToCreateJoinGroup"
-      >
+        @click="navigateToCreateJoinGroup">
         Create Group
       </button>
       <button
         class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg"
-        @click="navigateToJoinGroup"
-      >
+        @click="navigateToJoinGroup">
         Join Group
       </button>
     </div>
