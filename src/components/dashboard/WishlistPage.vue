@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 const wishlistItems = ref([
   { id: 1, name: 'Smartwatch', price: 199.99, category: 'Electronics' },
@@ -8,6 +8,27 @@ const wishlistItems = ref([
   { id: 4, name: 'Gaming Headset', price: 75.00, category: 'Electronics' },
   { id: 5, name: 'Scented Candle', price: 22.00, category: 'Home Goods' },
 ]);
+
+const searchQuery = ref('');
+const debouncedSearchQuery = ref('');
+
+let debounceTimer = null;
+
+watch(searchQuery, (newQuery) => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    debouncedSearchQuery.value = newQuery;
+  }, 300);
+});
+
+const filteredWishlistItems = computed(() => {
+  if (!debouncedSearchQuery.value) {
+    return wishlistItems.value;
+  }
+  return wishlistItems.value.filter(item =>
+    item.name.toLowerCase().includes(debouncedSearchQuery.value.toLowerCase())
+  );
+});
 
 const totalItems = computed(() => { return wishlistItems.value.length; });
 
@@ -35,7 +56,7 @@ const itemsByCategory = computed(() => {
           Filters
         </button>
 
-        <input type="text" placeholder="Search"
+        <input v-model="searchQuery" type="text" placeholder="Search"
           class="flex-1 min-w-[200px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
 
         <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg transition-colors">
@@ -45,8 +66,20 @@ const itemsByCategory = computed(() => {
     </div>
 
     <div class="bg-white rounded-xl shadow-md p-12">
-      <p class="text-gray-500 text-center">
-        Products will be displayed here</p>
+      <div class="bg-white rounded-xl shadow-md p-6 mt-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Items</h2>
+        <ul v-if="filteredWishlistItems.length > 0" class="space-y-4">
+          <li v-for="item in filteredWishlistItems" :key="item.id"
+            class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+            <div>
+              <p class="font-semibold text-gray-800">{{ item.name }}</p>
+              <p class="text-sm text-gray-600">{{ item.category }}</p>
+            </div>
+            <p class="font-bold text-lg text-blue-600">${{ item.price.toFixed(2) }}</p>
+          </li>
+        </ul>
+        <p v-else class="text-gray-500 text-center">No items match your search.</p>
+      </div>
 
       <p>Total Items: {{ totalItems }}</p>
       <p>Total Value: ${{ totalValue.toFixed(2) }}</p>
