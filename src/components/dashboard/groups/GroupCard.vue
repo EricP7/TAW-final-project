@@ -8,11 +8,11 @@ import { useRouter } from "vue-router";
 // const rules = ref("some rules here");
 
 const props = defineProps({
+  groupId: { type: String, required: true },
   groupName: { type: String, required: true },
   dueDate: { type: String, required: true },
   budget: { type: String, required: true },
   rules: { type: String, required: false, default: "" },
-  groupId: { type: String, required: true },
 });
 
 const router = useRouter();
@@ -47,8 +47,7 @@ const navigateToGroupDetails = () => {
       data from the database here
     </p>
 
-    <button
-class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
+    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
       @click="navigateToGroupDetails">
       Group Details
     </button>
