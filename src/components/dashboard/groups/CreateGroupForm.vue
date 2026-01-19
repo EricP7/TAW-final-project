@@ -10,6 +10,7 @@ const rules = ref('');
 
 const nameError = ref('');
 
+// Watch for group name changes to perform real-time validation
 watch(groupName, (newValue) => {
   if (newValue.length > 0 && newValue.length < 3) {
     nameError.value = 'Group name must be at least 3 characters long.';
@@ -20,6 +21,7 @@ watch(groupName, (newValue) => {
   }
 })
 
+// Watch all form fields to auto-save the draft to localStorage
 watch([groupName, dueDate, budget, rules],
   (value) => {
     const [name, date, budgetVal, rulesVal] = value;

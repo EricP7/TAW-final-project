@@ -18,7 +18,7 @@ const props = defineProps({
 const router = useRouter();
 
 const navigateToGroupDetails = () => {
-  router.push("/group-details");
+  router.push(`/group-details/${props.groupId}`);
 };
 </script>
 

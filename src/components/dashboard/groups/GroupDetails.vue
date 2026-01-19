@@ -1,15 +1,19 @@
 <script setup>
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { ref, watch } from "vue";
 
 const group = ref(null);
 const loading = ref(false);
 
+const route = useRoute();
+const router = useRouter();
+
 const loadGroupDetails = async (groupId) => {
   loading.value = true;
   group.value = null; // Clear previous group data
 
-  // Simulate an API call to fetch group details
+  // Simulate an API call latency to fetch group details
+  // In a real application, this would be an axios.get(`/api/groups/${groupId}`) call
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   // Mock group data based on groupId
@@ -37,12 +41,12 @@ const loadGroupDetails = async (groupId) => {
       budget: 'N/A',
       rules: 'N/A'
     };
-    loading.value = false;
   };
+  loading.value = false;
 }
 
 watch(
-  () => router.params.groupId, // Watch this specific property of the route params
+  () => route.params.groupId, // Watch this specific property of the route params
   async (newGroupId) => {
     if (newGroupId) {
       await loadGroupDetails(newGroupId);
@@ -53,7 +57,6 @@ watch(
   { immediate: true } // Run the watcher immediately on component mount
 )
 
-const router = useRouter();
 
 const navigateToInviteToGroup = () => {
   router.push("/invite-to-group");

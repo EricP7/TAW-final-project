@@ -19,13 +19,13 @@ const navigateToResetPassword = () => {
 }
 
 const handleSignIn = () => {
-  // Basic validation
+  // Basic validation to ensure fields are not empty
   if (!email.value.trim() || !password.value.trim()) {
     emit('loginError', 'Please enter both email and password.');
     return;
   }
 
-  // Simulate login (in real app, call API here)
+  // Simulate login (in a real production app, this would make an API call to the backend)
   try {
     const userData = {
       email: email.value,
@@ -34,7 +34,7 @@ const handleSignIn = () => {
 
     emit('loginSuccess', userData);
 
-    // Clear form and navigate
+    // Clear form and navigate to dashboard on success
     email.value = '';
     password.value = '';
     router.push("/dashboard");

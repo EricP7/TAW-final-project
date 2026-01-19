@@ -90,7 +90,7 @@
 
 ---
 
-## Status 2 - Roadmap 🚀 (To Be Implemented)
+## Status 2 - Roadmap 🚀 (In Progress)
 
 ### Requirements Overview (10.5p total)
 
@@ -98,12 +98,12 @@
 | --------------------------- | ------ | ---------- | -------- |
 | Toggl + GitHub Pages Deploy | 0.5p   | Easy       | 1        |
 | Routing (min 10)            | 0.5p   | ✅ Done    | -        |
-| Computed Properties (min 5) | 2p     | Medium     | 2        |
-| Watch (min 3)               | 2p     | Medium     | 3        |
+| Computed Properties (min 5) | 2p     | ✅ Done    | -        |
+| Watch (min 3)               | 2p     | ✅ Done    | -        |
 | Pinia Store (min 5 stores)  | 3p     | Hard       | 4        |
 | PWA Integration             | 1p     | Medium     | 5        |
-| ESLint                      | 0.5p   | Easy       | 6        |
-| Prettier                    | 0.5p   | Easy       | 7        |
+| ESLint                      | 0.5p   | ✅ Done    | -        |
+| Prettier                    | 0.5p   | ✅ Done    | -        |
 | Code Quality                | -4p    | -          | Always   |
 
 ---
@@ -296,10 +296,10 @@ computed(() => { return [...filteredGifts.value].sort((a, b) => { if
 
 **Implementation Checklist:**
 
--   [ ] Add 5+ computed properties across components
--   [ ] Use computed for derived state, not methods
--   [ ] Test that computed values update reactively
--   [ ] Document each computed property's purpose
+-   [x] Add 5+ computed properties across components
+-   [x] Use computed for derived state, not methods
+-   [x] Test that computed values update reactively
+-   [x] Document each computed property's purpose
 
 ---
 
@@ -377,10 +377,10 @@ active time, etc. });
 
 **Implementation Checklist:**
 
--   [ ] Add 3+ watchers for side effects
--   [ ] Use watch for async operations, localStorage, logging
--   [ ] Avoid using watch for derived state (use computed instead)
--   [ ] Clean up watchers if needed (return cleanup function)
+-   [x] Add 3+ watchers for side effects
+-   [x] Use watch for async operations, localStorage, logging
+-   [x] Avoid using watch for derived state (use computed instead)
+-   [x] Clean up watchers if needed (return cleanup function)
 
 ---
 
@@ -772,8 +772,8 @@ export default defineConfig({
 -   ✅ 0.5p - Routing (already have 19)
 -   ✅ 0.5p - ESLint (configured)
 -   ✅ 0.5p - Prettier (configured)
--   ⏳ 2p - Computed (need 5+)
--   ⏳ 2p - Watch (need 3+)
+-   ✅ 2p - Computed (9 implemented)
+-   ✅ 2p - Watch (4 implemented)
 -   ⏳ 3p - Pinia (5 stores, 10 getters, 10 actions)
 -   ⏳ 1p - PWA
 
@@ -805,8 +805,8 @@ export default defineConfig({
 -   [ ] All formatting passes (`yarn format:check`)
 -   [ ] App builds without errors (`yarn build`)
 -   [x] GitHub Pages deployment works
--   [ ] At least 5 computed properties implemented
--   [ ] At least 3 watchers implemented
+-   [x] At least 5 computed properties implemented
+-   [x] At least 3 watchers implemented
 -   [ ] 5 Pinia stores with 10+ getters and 10+ actions
 -   [ ] PWA manifest loads correctly
 -   [ ] App installable on mobile
@@ -820,8 +820,8 @@ export default defineConfig({
 ### Priority Order for Status 2
 
 1. ✅ Set up tooling (ESLint, Prettier) - DONE
-2. Implement Computed Properties (5+)
-3. Implement Watch (3+)
+2. ✅ Implement Computed Properties (9 implemented) - DONE
+3. ✅ Implement Watch (4 implemented) - DONE
 4. Build Pinia stores (5 stores, 10+ getters, 10+ actions)
 5. Add PWA support
 

@@ -21,20 +21,25 @@ import GiftFinder from "@/components/dashboard/GiftFinder.vue";
 import FriendsList from "@/components/dashboard/FriendsList.vue";
 
 const routes = [
+    // Public Pages
     { path: "/", component: LandingPage },
     { path: "/pricing", component: PricingPage },
     { path: "/faq", component: FAQ },
     { path: "/about-us", component: AboutUs },
     { path: "/how-it-works", component: HowItWorks },
+
+    // Auth Pages
     { path: "/sign-in", component: SignIn },
     { path: "/sign-up", component: SignUp },
     { path: "/reset-password", component: ResetPassword },
+
+    // Dashboard & Private Pages
     { path: "/dashboard", component: DashboardPage },
     { path: "/groups", component: GroupsPage },
     { path: "/create-group-info", component: CreateJoinGroup },
     { path: "/create-group", component: CreateGroupForm },
     { path: "/join-group", component: JoinGroup },
-    { path: "/group-details", component: GroupDetails },
+    { path: "/group-details/:groupId", component: GroupDetails },
     { path: "/invite-to-group", component: InviteToGroup },
     { path: "/drawn-name", component: DrawnName },
     { path: "/wishlist", component: WishlistPage },

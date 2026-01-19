@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+// This component is currently a UI placeholder.
+// Future implementation will include integration with a product API and filtering logic.
+</script>
 
 <template>
   <div class="max-w-6xl mx-auto px-4 py-12">

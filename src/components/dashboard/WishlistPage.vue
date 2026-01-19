@@ -14,6 +14,8 @@ const debouncedSearchQuery = ref('');
 
 let debounceTimer = null;
 
+// Debounce the search query to improve performance by waiting 300ms 
+// after the user stops typing before updating the filter
 watch(searchQuery, (newQuery) => {
   clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {

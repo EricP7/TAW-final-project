@@ -3,6 +3,7 @@ import { useRouter } from "vue-router";
 
 import { ref, computed } from 'vue';
 
+// Mock user data store. In a real app, this would be managed by a global state library like Pinia.
 const userStore = ref({
   activeGroups: [
     { id: '1', name: 'Family Christmas' },
