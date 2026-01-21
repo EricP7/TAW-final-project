@@ -9,10 +9,15 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src --ext .js,.vue",
+    "lint:fix": "eslint src --ext .js,.vue --fix",
+    "format": "prettier --write 'src/**/*.{js,vue}'",
+    "format:check": "prettier --check 'src/**/*.{js,vue}'"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
+    "pinia": "^3.0.4",
     "tailwindcss": "^4.1.17",
     "vue": "^3.5.22",
     "vue-router": "^4.6.3"
