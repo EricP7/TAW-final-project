@@ -1,26 +1,23 @@
 <script setup>
 import { useRouter } from "vue-router";
+import { computed } from "vue";
+import { useGroupsStore } from "@/stores/groups";
+import { useUserStore } from "@/stores/user";
 
-import { ref, computed } from 'vue';
 
-// Mock user data store. In a real app, this would be managed by a global state library like Pinia.
-const userStore = ref({
-  activeGroups: [
-    { id: '1', name: 'Family Christmas' },
-    { id: '3', name: 'Friends Gift Exchange' }
-  ],
-  groups: [
-    { id: '1', name: 'Family Christmas', drawnName: 'Alice' }, // Drawn
-    { id: '2', name: 'Office Party', drawnName: null },      // Pending draw
-    { id: '3', name: 'Friends Gift Exchange', drawnName: 'Bob' }    // Drawn
-  ]
+// from pinia stores
+const groupsStore = useGroupsStore();
+const userStore = useUserStore();
+
+groupsStore.fetchGroups();
+userStore.login("guest", "guestpassword");
+
+const welcomeMessage = computed(() => {
+  if (userStore.isAuthenticated) {
+    return `Welcome back, ${userStore.username}!`;
+  }
+  return "Welcome!";
 });
-
-const activeGroupsCount = computed(() => { return userStore.value.activeGroups.length; });
-
-const hasPendingDraws = computed(() => {
-  return userStore.value.groups.some(group => group.drawnName === null);
-})
 
 const router = useRouter();
 
@@ -46,9 +43,12 @@ const navigateToFriendsList = () => {
     <h1 class="text-4xl font-bold text-gray-900 mb-12 text-center">
       Dashboard
     </h1>
+    <h2 class="text-2xl text-gray-800 mb-4 text-center">
+      {{ welcomeMessage }}
+    </h2>
     <h3 class="text-lg text-gray-700 mb-8 text-center">
-      <p>You are in {{ activeGroupsCount }} active groups</p>
-      <p>There are {{ hasPendingDraws ? 'pending draws' : 'no pending draws' }}</p>
+      <p>You are in {{ groupsStore.activeGroups.length }} active groups</p>
+      <p>There are {{ groupsStore.hasPendingDraws ? 'pending draws' : 'no pending draws' }}</p>
     </h3>
 
 

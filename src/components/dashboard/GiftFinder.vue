@@ -1,6 +1,19 @@
 <script setup>
-// This component is currently a UI placeholder.
-// Future implementation will include integration with a product API and filtering logic.
+import { computed } from 'vue';
+import { useGiftsStore } from '@/stores/gifts';
+
+const giftsStore = useGiftsStore();
+
+giftsStore.fetchGifts();
+
+// ui-specific computed property
+const summaryText = computed(() => {
+  const count = giftsStore.filteredGifts.length;
+  if (count === 0) {
+    return 'No gifts found matching your criteria.';
+  }
+  return `Found ${count} ${count === 1 ? 'gift' : 'gifts'} matching your criteria.`;
+});
 </script>
 
 <template>
@@ -9,32 +22,19 @@
       Gift Finder
     </h1>
 
-    <div class="bg-white rounded-xl shadow-md p-6 mb-8">
-      <div class="flex flex-wrap gap-4 items-center justify-between">
-        <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg transition-colors">
-          Filters
-        </button>
-
-        <input
-          type="text"
-          placeholder="Search"
-          class="flex-1 min-w-[200px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-        >
-
-        <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg transition-colors">
-          Sort By
-        </button>
-
-        <button class="bg-purple-600 hover:bg-purple-700 text-white font-medium px-4 py-2 rounded-lg transition-colors">
-          Recommendations
-        </button>
-      </div>
-    </div>
-
-    <div class="bg-white rounded-xl shadow-md p-12">
-      <p class="text-gray-500 text-center">
-        Products will be displayed here
+    <div class="bg-white rounded-xl shadow-md p-6">
+      <p class="text-lg text-gray-700 text-center italic">
+        {{ summaryText }}
       </p>
+
+      <ul class="space-y-4">
+        <li
+v-for="gift in giftsStore.filteredGifts" :key="gift.id"
+          class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+          <p class="font-semibold text-gray-800">{{ gift.name }}</p>
+          <p class="font-bold text-lg text-blue-600">${{ gift.price }}</p>
+        </li>
+      </ul>
     </div>
   </div>
 </template>

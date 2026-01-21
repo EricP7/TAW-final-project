@@ -47,7 +47,8 @@ const navigateToGroupDetails = () => {
       data from the database here
     </p>
 
-    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
+    <button
+class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
       @click="navigateToGroupDetails">
       Group Details
     </button>

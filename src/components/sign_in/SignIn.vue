@@ -59,13 +59,15 @@ const handleSignIn = () => {
       <div class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-          <input v-model="email" type="email" placeholder="Enter Email"
+          <input
+v-model="email" type="email" placeholder="Enter Email"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-          <input v-model="password" type="password" placeholder="Enter Password"
+          <input
+v-model="password" type="password" placeholder="Enter Password"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
         </div>
 
@@ -79,7 +81,8 @@ const handleSignIn = () => {
             @click="navigateToSignUp">
             Create Account
           </button>
-          <button class="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+          <button
+class="text-blue-600 hover:text-blue-700 font-medium transition-colors"
             @click="navigateToResetPassword">
             Forgot Password?
           </button>

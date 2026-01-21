@@ -1,67 +1,45 @@
 <script setup>
 import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { useGroupsStore } from '@/stores/groups';
 
-const emit = defineEmits(['groupCreated', 'inviteParticipants']);
+const router = useRouter();
+const groupsStore = useGroupsStore();
 
-const groupName = ref('');
-const dueDate = ref('');
-const budget = ref(0);
-const rules = ref('');
+const formState = ref({
+  groupName: '',
+  budget: 50,
+  dueDate: '',
+  rules: '',
+});
 
-const nameError = ref('');
+// load saved data from localStorage when the component is first created
+const savedDraft = localStorage.getItem('groupFormDraft');
+if (savedDraft) {
+  // directly assign to .value since formState is a ref
+  formState.value = JSON.parse(savedDraft);
+}
 
-// Watch for group name changes to perform real-time validation
-watch(groupName, (newValue) => {
-  if (newValue.length > 0 && newValue.length < 3) {
-    nameError.value = 'Group name must be at least 3 characters long.';
-  } else if (newValue.length > 50) {
-    nameError.value = 'Group name cannot exceed 50 characters.';
-  } else {
-    nameError.value = '';
-  }
-})
+// ui specific watcher for auto-saving draft to localStorage
+watch(formState, (newFormState) => {
+  console.log('Form data changed, saving draft to localStorage');
+  localStorage.setItem('groupFormDraft', JSON.stringify(newFormState));
+},
+  { deep: true }); // 'deep: true' to watch nested properties
 
-// Watch all form fields to auto-save the draft to localStorage
-watch([groupName, dueDate, budget, rules],
-  (value) => {
-    const [name, date, budgetVal, rulesVal] = value;
-    localStorage.setItem('draftGroup', JSON.stringify({
-      name: name,
-      dueDate: date,
-      budget: budgetVal,
-      rules: rulesVal,
-    }));
-    console.log('Draft group saved to localStorage'); // For testing
-  }
-)
+const handleSubmit = async () => {
+  await groupsStore.createGroup(formState.value);
 
-// Handle create group
-const handleCreateGroup = () => {
-  const groupData = {
-    name: groupName.value,
-    dueDate: dueDate.value,
-    budget: budget.value,
-    rules: rules.value,
-  };
-  emit('groupCreated', groupData);
-
-  // Clear form fields
-  groupName.value = '';
-  dueDate.value = '';
-  budget.value = '';
-  rules.value = '';
-
-};
-
-// Handle invite
-const handleInvite = () => {
-  emit('inviteParticipants');
+  localStorage.removeItem('groupFormDraft');
+  router.push('/groups')
 }
 </script>
 
 <template>
   <div class="max-w-2xl mx-auto px-4 py-12">
-    <div class="bg-white rounded-xl shadow-lg p-8">
+    <form
+class="bg-white rounded-xl 
+      shadow-lg p-8" @submit.prevent="handleSubmit">
       <h1 class="text-3xl font-bold text-gray-900 mb-2 text-center">
         Create Group
       </h1>
@@ -71,44 +49,55 @@ const handleInvite = () => {
 
       <div class="space-y-5">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Group Name</label>
-          <input v-model="groupName" type="text" placeholder="Group Name"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
-          <p v-if="nameError" class="text-red-500 text-sm mt-1">{{ nameError }}</p>
+          <label
+for="groupName" class="block text-sm font-medium 
+      text-gray-700 mb-2">Group Name</label>
+          <input
+id="groupName" v-model="formState.groupName" type="text" placeholder="Group Name" class="w-full px-4 py-2 border border-gray-300 rounded-lg
+      focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none
+      transition-all" required>
+          <!-- Removed v-if="nameError" as nameError is not defined -->
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Due Date</label>
-          <input v-model="dueDate" type="date"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+          <label
+for="dueDate" class="block text-sm font-medium 
+      text-gray-700 mb-2">Due Date</label>
+          <input
+id="dueDate" v-model="formState.dueDate" type="date" class="w-full px-4 py-2 border border-gray-300 rounded-lg
+      focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none
+      transition-all" required>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Budget</label>
-          <input v-model="budget" type="text" placeholder="Budget (e.g., $30)"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+          <label
+for="budget" class="block text-sm font-medium text-gray-7
+      mb-2">Budget</label>
+          <input
+id="budget" v-model="formState.budget" type="number" placeholder="Budget (e.g., 50)" class="w-full px-4 py-2 border border-gray-300 rounded-lg
+          focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none
+          transition-all" required>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Rules</label>
-          <textarea v-model="rules" placeholder="Group rules and guidelines..." rows="4"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all resize-none" />
+          <label
+for="rules" class="block text-sm font-medium text-gray-70
+      mb-2">Rules</label>
+          <textarea
+id="rules" v-model="formState.rules" placeholder="Group rules and guidelines..." rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg
+      focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none
+      transition-all resize-none"></textarea>
         </div>
-
         <button
-          class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md"
-          @click="handleInvite">
-          Invite Participants
-        </button>
-
-        <button
-          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-md hover:shadow-lg mt-4"
-          @click="handleCreateGroup">
+type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white
+      font-semibold px-6 py-3 rounded-lg transition-colors shadow-md
+      hover:shadow-lg mt-4">
           Create Group
         </button>
       </div>
-    </div>
+    </form>
   </div>
+
 </template>
 
 <style></style>

@@ -25,6 +25,11 @@ export const useGroupsStore = defineStore("groups", () => {
         });
     });
 
+    // new getter: check for pending draws
+    const hasPendingDraws = computed(() => {
+        return groups.value.some(group => !group.drawn);
+    })
+
     // ACTION 4: Fetch all groups
     const fetchGroups = async () => {
         // API call
@@ -34,9 +39,36 @@ export const useGroupsStore = defineStore("groups", () => {
                 name: "Family Christmas",
                 dueDate: "2026-12-25",
                 budget: 50,
+                drawn: true,
+            },
+            {
+                id: 2,
+                name: "Office Party",
+                dueDate: "2026-12-20",
+                budget: 30,
+                drawn: false,
             }
         ]
-    }
+    };
 
-    return { groups, currentGroup, groupsCount, activeGroups, groupsByStatus, fetchGroups };
+    // ACTION: Create group
+    const createGroup = async (groupData) => {
+        const newGroup = {id: Date.now(), ...groupData, drawn: false};
+        groups.value.push(newGroup);
+        return newGroup;
+    };
+
+    // ACTION: Join group
+    const joinGroup = async (inviteCode) =>{
+        // API call
+        const group = {id: Date.now(), name: "New Group by Invite", inviteCode, drawn:false};
+        groups.value.push(group);
+    };
+
+    // ACTION: Delete group
+    const deleteGroup = async (groupId) => {
+        groups.value = groups.value.filter((g) => g.id !== groupId);
+    };
+
+    return { groups, currentGroup, groupsCount, activeGroups, groupsByStatus, hasPendingDraws, fetchGroups, createGroup, joinGroup, deleteGroup };
 })
