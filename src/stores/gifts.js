@@ -6,6 +6,7 @@ export const useGiftsStore = defineStore("gifts", () => {
     const filters = ref({ minPrice: 0, maxPrice: 1000 });
 
     // GETTER 10: Filtered gifts
+    // Filters gifts based on the minimum and maximum price filters.
     const filteredGifts = computed(() => {
         return gifts.value.filter(
             (g) =>
@@ -15,6 +16,8 @@ export const useGiftsStore = defineStore("gifts", () => {
     });
 
     // ACTION 11: Fetch gifts
+    // Fetches gifts from the server.
+    // In a real application, this would make an API call.
     const fetchGifts = async () => {
         // API call
         gifts.value = [
@@ -24,6 +27,7 @@ export const useGiftsStore = defineStore("gifts", () => {
     };
 
     // ACTION 12: Update filters
+    // Updates the price filters for gifts.
     const updateFilters = (newFilters) => {
         filters.value = { ...filters.value, ...newFilters };
     };

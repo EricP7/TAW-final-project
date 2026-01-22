@@ -5,25 +5,32 @@ import { ref, computed } from "vue";
 import { useGroupsStore } from "@/stores/groups";
 
 const router = useRouter();
+// Access the groups store to manage group-related state.
 const groupsStore = useGroupsStore();
 
-// fetch groups on component mount
+// Fetch groups when the component is mounted.
 groupsStore.fetchGroups();
 
+// Reactive reference for the search input field.
 const searchQuery = ref('');
 
+// Computed property: Filters the list of groups based on the search query.
 const filteredGroups = computed(() => {
   if (!searchQuery.value) {
+    // If no search query, return all groups.
     return groupsStore.groups;
   }
+  // Filter groups whose names include the search query (case-insensitive).
   return groupsStore.groups.filter(group =>
     group.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
+// Navigation function to the create/join group information page.
 const navigateToCreateJoinGroup = () => {
   router.push("/create-group-info");
 };
+// Navigation function to the join group page.
 const navigateToJoinGroup = () => {
   router.push("/join-group");
 };

@@ -2,20 +2,26 @@
 import { ref } from 'vue';
 import { useRouter } from "vue-router";
 
+// Define custom events that this component can emit.
 const emit = defineEmits(['groupJoined', 'joinError']);
+// Reactive reference for the invite code input field.
 const inviteCode = ref('');
 const router = useRouter();
 
+// Handles the action of joining a group.
 const handleJoinGroup = () => {
+  // 1. Validation: Check if the invite code field is empty.
   if (!inviteCode.value.trim()) {
     emit('joinError', 'Please enter an invite code.');
     return;
   }
 
+  // Emit an event indicating that a group has been joined with the provided invite code.
   emit('groupJoined', inviteCode.value);
 
-  // Clear the input field
+  // Clear the input field after attempting to join the group.
   inviteCode.value = '';
+  // Navigate to the groups page after the action.
   router.push("/groups");
 };
 

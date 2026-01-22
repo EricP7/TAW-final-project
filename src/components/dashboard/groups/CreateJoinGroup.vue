@@ -3,14 +3,17 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
+// Navigates to the "How it Works" information page.
 const navigateToHowItWorks = () => {
     router.push("/how-it-works");
 };
 
+// Navigates to the group creation form.
 const navigateToCreateGroup = () => {
     router.push("/create-group");
 };
 
+// Navigates to the group joining form.
 const navigateToJoinGroup = () => {
     router.push("/join-group");
 };

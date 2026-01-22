@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+// This component explains how the Secret Santa application works,
+// providing users with information about the process.
+</script>
 
 <template>
   <div class="max-w-4xl mx-auto px-4 py-16">

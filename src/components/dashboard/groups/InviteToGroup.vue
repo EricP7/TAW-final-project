@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+// This component provides various options for inviting users to a group,
+// including sharing a URL, inviting via email, searching for friends, or using an invite code.
+</script>
 
 <template>
   <div class="max-w-2xl mx-auto px-4 py-12">

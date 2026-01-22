@@ -2,22 +2,25 @@
 
 import { useRouter } from "vue-router";
 
-// const groupName = ref("name");
-// const dueDate = ref("10.12.2025");
-// const budget = ref("30$");
-// const rules = ref("some rules here");
-
+// Define the properties (props) that this component accepts.
 const props = defineProps({
+  // Unique identifier for the group. Required.
   groupId: { type: String, required: true },
+  // Name of the group. Required.
   groupName: { type: String, required: true },
+  // Due date for the Secret Santa exchange. Required.
   dueDate: { type: String, required: true },
+  // Budget for gifts in the group. Required.
   budget: { type: String, required: true },
+  // Optional rules or guidelines for the group. Defaults to an empty string.
   rules: { type: String, required: false, default: "" },
 });
 
 const router = useRouter();
 
+// Function to navigate to the detailed view of the current group.
 const navigateToGroupDetails = () => {
+  // Uses the `groupId` prop to construct the dynamic route.
   router.push(`/group-details/${props.groupId}`);
 };
 </script>

@@ -2,16 +2,19 @@
 import { computed } from 'vue';
 import { useGiftsStore } from '@/stores/gifts';
 
+// Access the gifts store to manage gift-related state.
 const giftsStore = useGiftsStore();
 
+// Fetch the list of gifts when the component is set up.
 giftsStore.fetchGifts();
 
-// ui-specific computed property
+// Computed property to create a summary text based on the number of filtered gifts.
 const summaryText = computed(() => {
   const count = giftsStore.filteredGifts.length;
   if (count === 0) {
     return 'No gifts found matching your criteria.';
   }
+  // Provides a grammatically correct summary.
   return `Found ${count} ${count === 1 ? 'gift' : 'gifts'} matching your criteria.`;
 });
 </script>

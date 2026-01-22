@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+// This component displays information about the application or organization.
+// Currently, it serves as a placeholder for "About Us" content.
+</script>
 
 <template>
   <div class="max-w-4xl mx-auto px-4 py-16">

@@ -3,8 +3,10 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ActionButton from '../ActionButton.vue';
 
+// Define custom events that this component can emit.
 const emit = defineEmits(['signUpSuccess', 'signUpError']);
 
+// Reactive references for form input fields.
 const firstName = ref('');
 const lastName = ref('');
 const email = ref('');
@@ -13,20 +15,21 @@ const confirmPassword = ref('');
 
 const router = useRouter();
 
+// Handles the sign-up process when the form is submitted.
 const handleSignUp = () => {
-  // Validation
+  // 1. Basic Validation: Check if all required fields are filled.
   if (!firstName.value.trim() || !lastName.value.trim() || !email.value.trim() || !password.value.trim() || !confirmPassword.value.trim()) {
     emit('signUpError', 'Please fill in all fields.');
     return;
   }
 
-  // Check if passwords match
+  // 2. Password Match Validation: Ensure password and confirm password fields are identical.
   if (password.value !== confirmPassword.value) {
     emit('signUpError', 'Passwords do not match.');
     return;
   }
 
-  // Simulate signup (in real app, call API here)
+  // 3. Simulate Signup (in a real application, this would involve an API call to a backend service).
   try {
     const userData = {
       firstName: firstName.value,
@@ -34,16 +37,19 @@ const handleSignUp = () => {
       email: email.value,
     };
 
+    // Emit a success event with the user data.
     emit('signUpSuccess', userData);
 
-    // Clear form and navigate
+    // Clear the form fields after successful signup.
     firstName.value = '';
     lastName.value = '';
     email.value = '';
     password.value = '';
     confirmPassword.value = '';
+    // Navigate to the dashboard page after successful signup.
     router.push('/dashboard');
   } catch (error) {
+    // If an error occurs during the simulated signup, emit an error event.
     emit('signUpError', error.message);
   }
 }

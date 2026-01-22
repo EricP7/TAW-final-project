@@ -1,7 +1,11 @@
 <script setup>
+// Define the properties (props) that this component accepts.
+// 'type' is used to display text within the button, likely "Sign In" or "Profile".
 defineProps(["type"]);
 import { RouterLink } from "vue-router";
 
+// Defines the navigation targets.
+// The first element is for signing in, the second for the user profile.
 const target = ["/sign-in", "/profile"];
 </script>
 

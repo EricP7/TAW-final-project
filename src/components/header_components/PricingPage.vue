@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+// This component displays pricing information for the application's services.
+// Currently, it serves as a placeholder for pricing details.
+</script>
 
 <template>
   <div class="max-w-4xl mx-auto px-4 py-16">

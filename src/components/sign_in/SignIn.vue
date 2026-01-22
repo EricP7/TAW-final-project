@@ -3,43 +3,49 @@ import { ref } from 'vue';
 import { useRouter } from "vue-router";
 import ActionButton from '../ActionButton.vue';
 
+// Define custom events that this component can emit.
 const emit = defineEmits(['loginSuccess', 'loginError']);
 
+// Reactive references for the email and password input fields.
 const email = ref('');
 const password = ref('');
 
 const router = useRouter();
 
+// Navigates to the sign-up page.
 const navigateToSignUp = () => {
   router.push("/sign-up");
 }
 
+// Navigates to the reset password page.
 const navigateToResetPassword = () => {
   router.push("/reset-password");
 }
 
+// Handles the sign-in process when the form is submitted.
 const handleSignIn = () => {
-  // Basic validation to ensure fields are not empty
+  // 1. Basic Validation: Ensure both email and password fields are not empty.
   if (!email.value.trim() || !password.value.trim()) {
     emit('loginError', 'Please enter both email and password.');
     return;
   }
 
-  // Simulate login (in a real production app, this would make an API call to the backend)
+  // 2. Simulate Login (in a real application, this would involve an API call to authenticate the user).
   try {
     const userData = {
       email: email.value,
     };
 
-
+    // Emit a success event with the user data.
     emit('loginSuccess', userData);
 
-    // Clear form and navigate to dashboard on success
+    // Clear the form fields and navigate to the dashboard upon successful simulated login.
     email.value = '';
     password.value = '';
     router.push("/dashboard");
 
   } catch (error) {
+    // If an error occurs during the simulated login, emit an error event.
     emit('loginError', error.message);
   }
 }

@@ -4,6 +4,7 @@ import ActionButton from '../ActionButton.vue';
 
 const router = useRouter();
 
+// Navigates to the "How it Works" information page.
 const navigateToHowItWorks = () => {
     router.push("/how-it-works");
 };

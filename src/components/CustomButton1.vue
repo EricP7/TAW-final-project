@@ -1,4 +1,6 @@
 <script setup>
+// Define the properties (props) that this component accepts.
+// 'content' is the text to be displayed inside the button.
 defineProps(["content"]);
 </script>
 

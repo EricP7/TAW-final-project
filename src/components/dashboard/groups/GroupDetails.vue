@@ -4,29 +4,36 @@ import { watch } from "vue";
 import { useGroupsStore } from "@/stores/groups";
 
 const route = useRoute();
+// Access the groups store to manage group-related state.
 const groupsStore = useGroupsStore();
 
+// Fetch all groups when the component is mounted to ensure the data is available.
 groupsStore.fetchGroups();
-// ui specific watcher
-// it reacts to changes in the route's 'groupId' parameter
+
+// Watcher: Reacts to changes in the route's 'groupId' parameter.
+// This is used to dynamically load and display details for the currently selected group.
 watch(
-  () => route.params.groupId,
-  (newId) => {
+  () => route.params.groupId, // The source to watch: the 'groupId' parameter from the current route.
+  (newId) => { // Callback function executed when 'groupId' changes.
     if (newId) {
-      // find the group in the store using the correct ID
+      // Find the group in the store's 'groups' array using the new ID.
+      // The ID from route params is a string, so ensure type consistency with String(g.id).
       const foundGroup = groupsStore.groups.find(g => String(g.id) === newId);
 
       if (foundGroup) {
+        // If a group is found, set it as the current group in the store.
         groupsStore.currentGroup = foundGroup;
       } else {
+        // If no group is found, log a warning and clear the current group.
         console.warn(`Group with ID ${newId} not found.`);
         groupsStore.currentGroup = null;
       }
     } else {
+      // If 'groupId' is not present in the route (e.g., navigating away), clear the current group.
       groupsStore.currentGroup = null;
     }
   },
-  { immediate: true }
+  { immediate: true } // 'immediate: true' ensures the watcher runs immediately on component mount.
 );
 </script>
 

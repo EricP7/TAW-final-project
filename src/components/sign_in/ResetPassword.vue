@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+// This component provides a form for users to request a password reset.
+// It typically takes an email address and sends a reset link.
+</script>
 
 <template>
   <div class="max-w-md mx-auto px-4 py-16">

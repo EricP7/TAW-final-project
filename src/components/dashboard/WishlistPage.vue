@@ -2,8 +2,10 @@
 import { ref, computed, watch } from 'vue';
 import { useWishlistStore } from '@/stores/wishlist';
 
+// Access the wishlist store to manage wishlist items.
 const wishlistStore = useWishlistStore();
 
+// Populate the wishlist with some initial items if it's empty (for demonstration purposes).
 if (wishlistStore.items.length === 0) {
   wishlistStore.addItem({ name: 'Smartwatch', price: 199.99, category: 'Electronics' });
   wishlistStore.addItem({ name: 'Running Shoes', price: 89.99, category: 'Footwear' });
@@ -15,8 +17,8 @@ const searchQuery = ref('');
 const debouncedSearchQuery = ref('');
 let debounceTimer = null;
 
-// Debounce the search query to improve performance by waiting 300ms 
-// after the user stops typing before updating the filter
+// Watcher: Debounces the search query to optimize performance.
+// It delays updating the `debouncedSearchQuery` by 300ms after the user stops typing.
 watch(searchQuery, (newQuery) => {
   clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
@@ -24,15 +26,19 @@ watch(searchQuery, (newQuery) => {
   }, 300);
 });
 
+// Computed property: Filters wishlist items based on the debounced search query.
 const filteredWishlistItems = computed(() => {
   if (!debouncedSearchQuery.value) {
+    // If no search query, return all items.
     return wishlistStore.items;
   }
+  // Filter items whose names include the search query (case-insensitive).
   return wishlistStore.items.filter(item =>
     item.name.toLowerCase().includes(debouncedSearchQuery.value.toLowerCase())
   );
 });
 
+// Computed property: Formats the total value of wishlist items as a currency string.
 const formattedTotalValue = computed(() => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',

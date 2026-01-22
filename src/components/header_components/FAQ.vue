@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+// This component displays a list of Frequently Asked Questions.
+// Currently, it serves as a placeholder for FAQ content.
+</script>
 
 <template>
   <div class="max-w-4xl mx-auto px-4 py-16">

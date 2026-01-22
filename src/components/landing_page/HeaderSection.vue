@@ -2,15 +2,20 @@
 import { RouterLink } from "vue-router";
 import ProfileTab from "../header_components/ProfileTab.vue";
 
+// Define the properties (props) that this component accepts.
 const props = defineProps({
+  // The name of the brand to display in the header.
   brandName: {
     type: String,
     default: "Secret Santa",
   },
+  // The path to navigate to when the brand name is clicked.
   brandPath: {
     type: String,
     default: "/",
   },
+  // An array of navigation links to display in the header.
+  // Each link object should have a 'label' and a 'path'.
   navigationLinks: {
     type: Array,
     default: () => [
@@ -20,10 +25,12 @@ const props = defineProps({
       { label: "About Us", path: "/about-us" },
     ],
   },
+  // Boolean to control the visibility of the ProfileTab component.
   showProfile: {
     type: Boolean,
     default: true,
   },
+  // The type of profile tab to display, e.g., "Sign In" or "Profile".
   profileType: {
     type: String,
     default: "Sign In",

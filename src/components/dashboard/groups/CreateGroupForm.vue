@@ -4,33 +4,41 @@ import { useRouter } from 'vue-router';
 import { useGroupsStore } from '@/stores/groups';
 
 const router = useRouter();
+// Access the groups store to create new groups.
 const groupsStore = useGroupsStore();
 
+// Reactive form state to hold the input values for creating a new group.
 const formState = ref({
   groupName: '',
-  budget: 50,
+  budget: 50, // Default budget.
   dueDate: '',
   rules: '',
 });
 
-// load saved data from localStorage when the component is first created
+// Load saved draft data from localStorage when the component is initialized.
 const savedDraft = localStorage.getItem('groupFormDraft');
 if (savedDraft) {
-  // directly assign to .value since formState is a ref
+  // If a draft exists, parse it and assign it to the formState.
   formState.value = JSON.parse(savedDraft);
 }
 
-// ui specific watcher for auto-saving draft to localStorage
+// Watcher: Automatically saves the form's current state to localStorage whenever `formState` changes.
+// This provides a basic auto-save draft functionality.
 watch(formState, (newFormState) => {
   console.log('Form data changed, saving draft to localStorage');
+  // Stringify the reactive object to store it in localStorage.
   localStorage.setItem('groupFormDraft', JSON.stringify(newFormState));
 },
-  { deep: true }); // 'deep: true' to watch nested properties
+  { deep: true }); // `deep: true` is crucial for watching changes within nested properties of `formState`.
 
+// Handles the form submission for creating a new group.
 const handleSubmit = async () => {
+  // Call the `createGroup` action from the Pinia store with the current form data.
   await groupsStore.createGroup(formState.value);
 
+  // After successful group creation, remove the saved draft from localStorage.
   localStorage.removeItem('groupFormDraft');
+  // Navigate the user to the groups listing page.
   router.push('/groups')
 }
 </script>

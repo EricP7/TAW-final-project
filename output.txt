@@ -1,0 +1,1 @@
+I have successfully added comments to all Pinia stores and Vue components, focusing on clarifying logic, computed properties, watchers, Pinia getters, and actions as requested. Simple presentational components also received appropriate comments.

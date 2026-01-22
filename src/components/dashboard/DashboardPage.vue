@@ -9,18 +9,24 @@ import { useUserStore } from "@/stores/user";
 const groupsStore = useGroupsStore();
 const userStore = useUserStore();
 
+// Fetch initial data for the dashboard
 groupsStore.fetchGroups();
+// For demonstration, log in a guest user. In a real app, this would be handled by a login page.
 userStore.login("guest", "guestpassword");
 
+// Computed property to generate a dynamic welcome message.
 const welcomeMessage = computed(() => {
   if (userStore.isAuthenticated) {
+    // If the user is authenticated, personalize the message.
     return `Welcome back, ${userStore.username}!`;
   }
+  // Generic welcome message for unauthenticated users.
   return "Welcome!";
 });
 
 const router = useRouter();
 
+// Navigation functions to move between different parts of the dashboard.
 const navigateToMyGroups = () => {
   router.push("/groups");
 };

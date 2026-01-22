@@ -1,16 +1,19 @@
 <script setup>
-// Define props
+// Define the properties (props) that this component accepts.
 const props = defineProps({
+    // The text to display inside the button. Defaults to 'Click me'.
     text: {
         type: String,
         default: 'Click me'
     }
 });
 
-// Define emits
+// Define the custom events that this component can emit.
 const emit = defineEmits(['buttonClick']);
 
+// Handles the click event of the button.
 const handleClick = () => {
+    // Emits a custom 'buttonClick' event when the button is clicked.
     emit('buttonClick');
 };
 </script>
