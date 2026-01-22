@@ -1,19 +1,27 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
 
-export const useFriendsStore = defineStore("friends", () => {
-    const friends = ref([]);
+export const useFriendsStore = defineStore("friends", {
+    // State
+    state: () => ({
+        friends: [],
+    }),
 
-    // GETTER 8: Friends count
-    // Returns the total number of friends.
-    const friendsCount = computed(() => friends.value.length);
+    // Getters
+    getters: {
+        // GETTER 8: Friends count
+        // Returns the total number of friends.
+        friendsCount(state) {
+            return state.friends.length;
+        },
+    },
 
-    // ACTION 9: Add friend
-    // Adds a new friend.
-    // In a real application, this would make an API call to add the friend.
-    const addFriend = async (friendId) => {
-        friends.value.push({ id: friendId, name: "Friend" });
-    };
-
-    return { friends, friendsCount, addFriend };
-})
+    // Actions
+    actions: {
+        // ACTION 9: Add friend
+        // Adds a new friend.
+        // In a real application, this would make an API call to add the friend.
+        async addFriend(friendId) {
+            this.friends.push({ id: friendId, name: "Friend" });
+        },
+    },
+});
