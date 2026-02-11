@@ -24,9 +24,9 @@ const dashboardCards = ref([{
 
     <div>
         <div>
-            <h1>Dashboard</h1>
+            <h1 class="flex justify-center text-5xl font-bold p-10">Dashboard</h1>
         </div>
-        <div>
+        <div class="flex justify-around p-5">
             <DashboardCard v-for="(card, index) of dashboardCards" :key="index" :name="card.name"
                 :description="card.description"></DashboardCard>
         </div>

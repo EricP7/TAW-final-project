@@ -1,11 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { useRouter, RouterLink } from 'vue-router'
-import HeaderButton from '@/components/HeaderButton.vue';
+import { RouterLink } from 'vue-router'
+import AuthButton from '@/components/AuthButton.vue';
 
-const router = useRouter();
-
-// object with navigation item alias and route to redirect to
+// object with navigation item label and route to redirect to
 const navigationItem = ref([
     {
         label: 'Dashboard',
@@ -23,27 +21,23 @@ const navigationItem = ref([
         label: 'About Us',
         route: 'about-us',
     },
-    {
-        label: 'Sign Up',
-        route: 'sign-up',
-    },
-    {
-        label: 'Sign In',
-        route: 'sign-in',
-    }
 ])
+
 
 
 </script>
 
 <template>
-    <div>
+    <div class="flex justify-center">
         <!-- <HeaderButton :alias="navigationItem[1].alias" @click="router.push({ path: navigationItem[1].route })">
         </HeaderButton>
         <HeaderButton :alias="navigationItem[0].alias" @click="router.push({ path: navigationItem[0].route })">
         </HeaderButton> -->
-        <RouterLink v-for="link in navigationItem" :to="link.route">{{ link.label }}</RouterLink>
-        <p>.</p>
+        <RouterLink v-for="link in navigationItem" :to="link.route" class="m-5 cursor-pointer">
+            {{ link.label }}
+        </RouterLink>
+        <AuthButton class="m-5"></AuthButton>
+
 
     </div>
 </template>
