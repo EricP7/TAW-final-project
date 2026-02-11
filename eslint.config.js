@@ -10,7 +10,7 @@ import pluginPrettier from "eslint-config-prettier"
 export default defineConfig([
   { ignores: ["dist/**", "dev-dist/**", ".pnp.*", ".yarn/**", "node_modules/**", "**/*.md"] },
   { files: ["**/*.{js,mjs,cjs,vue}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: globals.browser } },
-  ...pluginVue.configs["flat/essential"].map(config => ({
+  ...pluginVue.configs["flat/recommended"].map(config => ({
     ...config,
     files: ["**/*.vue"]
   })),
