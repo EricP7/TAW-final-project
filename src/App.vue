@@ -1,16 +1,19 @@
 <script setup>
-import Header from "./components/landing_page/HeaderSection.vue";
 import { RouterView } from "vue-router";
+import HeaderComponent from "@/components/HeaderSection.vue";
 </script>
 
 <template>
   <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-    <Header />
+
     <title>TAW Final Project</title>
+
+    <HeaderComponent></HeaderComponent>
     <RouterView />
   </div>
 </template>
 
 <style>
 @import "tailwindcss";
+/* @import "bootstrap-icons" */
 </style>

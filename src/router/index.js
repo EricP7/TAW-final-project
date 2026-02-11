@@ -1,50 +1,11 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router';
 
-import LandingPage from "@/components/landing_page/LandingPage.vue";
-import PricingPage from "@/components/header_components/PricingPage.vue";
-import FAQ from "@/components/header_components/FAQ.vue";
-import AboutUs from "@/components/header_components/AboutUs.vue";
-import HowItWorks from "@/components/landing_page/HowItWorks.vue";
-import SignIn from "@/components/sign_in/SignIn.vue";
-import SignUp from "@/components/sign_in/SignUp.vue";
-import ResetPassword from "@/components/sign_in/ResetPassword.vue";
-import DashboardPage from "@/components/dashboard/DashboardPage.vue";
-import GroupsPage from "@/components/dashboard/groups/GroupsPage.vue";
-import CreateJoinGroup from "@/components/dashboard/groups/CreateJoinGroup.vue";
-import CreateGroupForm from "@/components/dashboard/groups/CreateGroupForm.vue";
-import JoinGroup from "@/components/dashboard/groups/JoinGroup.vue";
-import GroupDetails from "@/components/dashboard/groups/GroupDetails.vue";
-import InviteToGroup from "@/components/dashboard/groups/InviteToGroup.vue";
-import DrawnName from "@/components/dashboard/DrawnName.vue";
-import WishlistPage from "@/components/dashboard/WishlistPage.vue";
-import GiftFinder from "@/components/dashboard/GiftFinder.vue";
-import FriendsList from "@/components/dashboard/FriendsList.vue";
+import LandingPage from '@/components/pages/LandingPage.vue';
+import DashboardPage from '@/components/pages/DashboardPage.vue';
 
 const routes = [
-    // Public Pages
     { path: "/", component: LandingPage },
-    { path: "/pricing", component: PricingPage },
-    { path: "/faq", component: FAQ },
-    { path: "/about-us", component: AboutUs },
-    { path: "/how-it-works", component: HowItWorks },
-
-    // Auth Pages
-    { path: "/sign-in", component: SignIn },
-    { path: "/sign-up", component: SignUp },
-    { path: "/reset-password", component: ResetPassword },
-
-    // Dashboard & Private Pages
     { path: "/dashboard", component: DashboardPage },
-    { path: "/groups", component: GroupsPage },
-    { path: "/create-group-info", component: CreateJoinGroup },
-    { path: "/create-group", component: CreateGroupForm },
-    { path: "/join-group", component: JoinGroup },
-    { path: "/group-details/:groupId", component: GroupDetails },
-    { path: "/invite-to-group", component: InviteToGroup },
-    { path: "/drawn-name", component: DrawnName },
-    { path: "/wishlist", component: WishlistPage },
-    { path: "/gift-finder", component: GiftFinder },
-    { path: "/friends", component: FriendsList },
 ];
 
 const router = createRouter({

@@ -1,1 +1,7 @@
-I have successfully added comments to all Pinia stores and Vue components, focusing on clarifying logic, computed properties, watchers, Pinia getters, and actions as requested. Simple presentational components also received appropriate comments.
+I have addressed the "Unexpected confirm" error you encountered in `GroupCard.vue`.
+
+The issue was likely due to a linter rule or context where the global `confirm` function was not being explicitly recognized. I have updated the code in `src/components/dashboard/groups/GroupCard.vue` from `confirm(...)` to `window.confirm(...)`.
+
+This change explicitly references the global `confirm` function available in the browser environment, which should resolve the error.
+
+Please try running your application again.
